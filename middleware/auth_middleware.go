@@ -20,6 +20,8 @@ func (middleware *AuthMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Reque
 	if r.Header.Get("X-API-Key") == "RAHASIA" {
 		//ok
 		middleware.Handler.ServeHTTP(w, r)
+	} else if r.URL.Path == "/" {
+		middleware.Handler.ServeHTTP(w, r)
 	} else {
 		//error
 		w.Header().Set("Content-Type", "application/json")
